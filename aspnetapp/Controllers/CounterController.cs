@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using aspnetapp;
+using Microsoft.AspNetCore.WebUtilities;
+using System.Web;
 
 public class CounterRequest {
     public string action { get; set; }
@@ -89,7 +91,7 @@ namespace aspnetapp.Controllers
                     await _context.SaveChangesAsync();
                     return new CounterResponse { data = counter.count };
                 case "hello":
-                    return new CounterResponse { msg = "哈喽！世界" };
+                    return new CounterResponse { msg = HttpUtility.UrlEncode("哈喽！世界") };
             }
         }
     }
