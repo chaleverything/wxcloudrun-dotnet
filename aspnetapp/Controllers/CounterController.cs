@@ -56,22 +56,40 @@ namespace aspnetapp.Controllers
         [HttpPost]
         public async Task<ActionResult<CounterResponse>> PostCounter(CounterRequest data)
         {
-            if (data.action == "inc") {
-                var counter = await getCounterWithInit();
-                counter.count += 1;
-                counter.updatedAt = DateTime.Now;
-                await _context.SaveChangesAsync();
-                return new CounterResponse { data = counter.count };
-            }
-            else if (data.action == "clear") {
-                var counter = await getCounterWithInit();
-                counter.count = 0;
-                counter.updatedAt = DateTime.Now;
-                await _context.SaveChangesAsync();
-                return new CounterResponse { data = counter.count };
-            }
-            else {
-                return BadRequest();
+            //if (data.action == "inc") {
+            //    var counter = await getCounterWithInit();
+            //    counter.count += 1;
+            //    counter.updatedAt = DateTime.Now;
+            //    await _context.SaveChangesAsync();
+            //    return new CounterResponse { data = counter.count };
+            //}
+            //else if (data.action == "clear") {
+            //    var counter = await getCounterWithInit();
+            //    counter.count = 0;
+            //    counter.updatedAt = DateTime.Now;
+            //    await _context.SaveChangesAsync();
+            //    return new CounterResponse { data = counter.count };
+            //}
+            //else {
+            //    return BadRequest();
+            //}
+            var counter = await getCounterWithInit();
+            switch (data.action)
+            {
+                default:
+                    return BadRequest();
+                case "inc":
+                    counter.count += 1;
+                    counter.updatedAt = DateTime.Now;
+                    await _context.SaveChangesAsync();
+                    return new CounterResponse { data = counter.count };
+                case "clear":
+                    counter.count = 0;
+                    counter.updatedAt = DateTime.Now;
+                    await _context.SaveChangesAsync();
+                    return new CounterResponse { data = counter.count };
+                case "hello":
+                    return new CounterResponse { msg = "¹þà¶£¡ÊÀ½ç" };
             }
         }
     }
