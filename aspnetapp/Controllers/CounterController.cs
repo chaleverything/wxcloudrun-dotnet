@@ -13,6 +13,7 @@ public class CounterRequest {
 }
 public class CounterResponse {
     public int data { get; set; }
+    public string msg { get; set; }
 }
 
 namespace aspnetapp.Controllers
