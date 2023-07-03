@@ -87,6 +87,8 @@ namespace aspnetapp.Controllers
                     return new CounterResponse { data = counter.count };
                 case "hello":
                     return new CounterResponse { msg = "哈喽！世界".EncodeBase64() };
+                case "hello2":
+                    return new CounterResponse { msg = HttpUtility.UrlEncode( "哈喽！世界".EncodeBase64()) };
             }
         }
     }
