@@ -2,8 +2,10 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Web;
-using System.Text;
 using aspnetapp.Codes;
+using DataBase;
+using Models;
+using Service;
 
 public class CounterRequest {
     public string action { get; set; }
@@ -19,32 +21,20 @@ namespace aspnetapp.Controllers
     [ApiController]
     public class CounterController : ControllerBase
     {
-        private readonly CounterContext _context;
+        private readonly CounterService _counterService;
+        private readonly LogService _logService;
 
-        public CounterController(CounterContext context)
+        public CounterController(CounterService counterService, LogService logService)
         {
-            _context = context;
+            _counterService = counterService;
+            _logService = logService;
         }
-        private async Task<Counter> getCounterWithInit()
-        {
-            var counters = await _context.Counters.ToListAsync();
-            if (counters.Count() > 0)
-            {
-                return counters[0];
-            }
-            else
-            {
-                var counter = new Counter { count = 0, createdAt = DateTime.Now, updatedAt = DateTime.Now };
-                _context.Counters.Add(counter);
-                await _context.SaveChangesAsync();
-                return counter;
-            }
-        }
+
         // GET: api/count
         [HttpGet]
         public async Task<ActionResult<CounterResponse>> GetCounter()
         {
-            var counter =  await getCounterWithInit();
+            var counter =  await _counterService.GetCounterWithInit();
             return new CounterResponse { data = counter.count };
         }
 
@@ -53,39 +43,19 @@ namespace aspnetapp.Controllers
         [HttpPost]
         public async Task<ActionResult<CounterResponse>> PostCounter(CounterRequest data)
         {
-            //if (data.action == "inc") {
-            //    var counter = await getCounterWithInit();
-            //    counter.count += 1;
-            //    counter.updatedAt = DateTime.Now;
-            //    await _context.SaveChangesAsync();
-            //    return new CounterResponse { data = counter.count };
-            //}
-            //else if (data.action == "clear") {
-            //    var counter = await getCounterWithInit();
-            //    counter.count = 0;
-            //    counter.updatedAt = DateTime.Now;
-            //    await _context.SaveChangesAsync();
-            //    return new CounterResponse { data = counter.count };
-            //}
-            //else {
-            //    return BadRequest();
-            //}
-            var counter = await getCounterWithInit();
+            var counter = await _counterService.GetCounterWithInit();
             switch (data.action)
             {
                 default:
                     return BadRequest();
                 case "inc":
-                    counter.count += 1;
-                    counter.updatedAt = DateTime.Now;
-                    await _context.SaveChangesAsync();
+                    counter = await _counterService.Increase();
                     return new CounterResponse { data = counter.count };
                 case "clear":
-                    counter.count = 0;
-                    counter.updatedAt = DateTime.Now;
-                    await _context.SaveChangesAsync();
+                    counter = await _counterService.Increase();
                     return new CounterResponse { data = counter.count };
                 case "hello":
+                    _logService.Increase(new Log { subject = "转码日志", message = "哈喽！世界".EncodeBase64() });
                     return new CounterResponse { msg = "哈喽！世界".EncodeBase64() };
                 case "hello2":
                     return new CounterResponse { msg = HttpUtility.UrlEncode( "哈喽！世界".EncodeBase64()) };

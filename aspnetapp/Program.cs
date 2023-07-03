@@ -1,9 +1,12 @@
 using aspnetapp;
+using DataBase;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddDbContext<CounterContext>();
+builder.Services.AddDbContext<LogContext>();
 
 var app = builder.Build();
 // Configure the HTTP request pipeline.

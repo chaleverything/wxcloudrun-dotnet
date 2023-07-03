@@ -1,17 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
+﻿using Microsoft.EntityFrameworkCore;
 
-namespace aspnetapp
+namespace DataBase
 {
-    public partial class CounterContext : DbContext
+    public partial class DataBaseContext: DbContext
     {
-        public CounterContext()
+        public DataBaseContext()
         {
         }
-        public DbSet<Counter> Counters { get; set; } = null!;
-        public CounterContext(DbContextOptions<CounterContext> options)
+
+        public DataBaseContext(DbContextOptions<DataBaseContext> options)
             : base(options)
         {
         }
@@ -34,7 +31,7 @@ namespace aspnetapp
         {
             modelBuilder.UseCollation("utf8_general_ci")
                 .HasCharSet("utf8");
-            modelBuilder.Entity<Counter>().ToTable("Counters");
+
             OnModelCreatingPartial(modelBuilder);
         }
 

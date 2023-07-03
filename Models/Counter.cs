@@ -1,4 +1,4 @@
-namespace aspnetapp
+﻿namespace Models
 {
     public class Counter
     {
