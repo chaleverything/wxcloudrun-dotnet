@@ -5,9 +5,9 @@ WORKDIR /source
 
 # copy csproj and restore as distinct layers
 COPY *.sln .
-COPY Models/*.csproj ./Models/
-COPY DataBase/*.csproj ./DataBase/
-COPY Models/*.csproj ./Models/
+COPY Models/*.csproj ./aspnetapp/
+COPY DataBase/*.csproj ./aspnetapp/
+COPY Models/*.csproj ./aspnetapp/
 COPY aspnetapp/*.csproj ./aspnetapp/
 RUN dotnet restore -r linux-musl-x64 /p:PublishReadyToRun=true
 
