@@ -1,11 +1,10 @@
 #nullable disable
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using System.Web;
 using aspnetapp.Codes;
-using DataBase;
 using Models;
-using Service;
+using Service.Instance;
+using Service.Interface;
 
 public class CounterRequest {
     public string action { get; set; }
@@ -21,10 +20,10 @@ namespace aspnetapp.Controllers
     [ApiController]
     public class CounterController : ControllerBase
     {
-        private readonly CounterService _counterService;
-        private readonly LogService _logService;
+        private readonly ICounterService _counterService;
+        private readonly ILogService _logService;
 
-        public CounterController(CounterService counterService, LogService logService)
+        public CounterController(ICounterService counterService, ILogService logService)
         {
             _counterService = counterService;
             _logService = logService;
@@ -56,6 +55,9 @@ namespace aspnetapp.Controllers
                     return new CounterResponse { data = counter.count };
                 case "hello":
                     _logService.Increase(new Log { subject = "转码日志", message = "哈喽！世界".EncodeBase64() });
+                    _logService.Increase(new Log { subject = "MYSQL_USERNAME", message = Environment.GetEnvironmentVariable("MYSQL_USERNAME") });
+                    _logService.Increase(new Log { subject = "MYSQL_PASSWORD", message = Environment.GetEnvironmentVariable("MYSQL_PASSWORD") });
+                    _logService.Increase(new Log { subject = "MYSQL_ADDRESS", message = Environment.GetEnvironmentVariable("MYSQL_ADDRESS") });
                     return new CounterResponse { msg = "哈喽！世界".EncodeBase64() };
                 case "hello2":
                     return new CounterResponse { msg = HttpUtility.UrlEncode( "哈喽！世界".EncodeBase64()) };

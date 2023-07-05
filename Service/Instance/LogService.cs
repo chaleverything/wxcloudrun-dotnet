@@ -1,10 +1,11 @@
 ﻿using DataBase;
 using Microsoft.EntityFrameworkCore;
 using Models;
+using Service.Interface;
 
-namespace Service
+namespace Service.Instance
 {
-    public class LogService
+    public class LogService: ILogService
     {
         private readonly LogContext _context;
         public LogService(LogContext context)
@@ -21,7 +22,7 @@ namespace Service
         public async Task<List<Log>> Search(LogSearch search)
         {
             var query = _context.Log.AsNoTracking();
-            if(!string.IsNullOrWhiteSpace(search.subject))
+            if (!string.IsNullOrWhiteSpace(search.subject))
             {
                 query = query.Where(n => n.subject != null && n.subject.Contains(search.subject));
             }

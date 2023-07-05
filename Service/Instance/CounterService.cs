@@ -1,10 +1,11 @@
 ﻿using DataBase;
 using Microsoft.EntityFrameworkCore;
 using Models;
+using Service.Interface;
 
-namespace Service
+namespace Service.Instance
 {
-    public class CounterService
+    public class CounterService: ICounterService
     {
         private readonly CounterContext _context;
         public CounterService(CounterContext context)
