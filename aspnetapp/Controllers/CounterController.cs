@@ -54,13 +54,14 @@ namespace aspnetapp.Controllers
                     counter = await _counterService.Clear();
                     return new CounterResponse { data = counter.count };
                 case "hello":
-                    _logService.Increase(new Log { subject = "转码日志", message = "哈喽！世界".EncodeBase64() });
-                    _logService.Increase(new Log { subject = "MYSQL_USERNAME", message = Environment.GetEnvironmentVariable("MYSQL_USERNAME") });
-                    _logService.Increase(new Log { subject = "MYSQL_PASSWORD", message = Environment.GetEnvironmentVariable("MYSQL_PASSWORD") });
-                    _logService.Increase(new Log { subject = "MYSQL_ADDRESS", message = Environment.GetEnvironmentVariable("MYSQL_ADDRESS") });
-                    return new CounterResponse { msg = Environment.GetEnvironmentVariable("MYSQL_ADDRESS") };
+                    _logService.Increase(new Log { subject = "转码日志Unicode", message = "哈喽！世界".EncodeBase64("Unicode") });
+                    //_logService.Increase(new Log { subject = "MYSQL_USERNAME", message = Environment.GetEnvironmentVariable("MYSQL_USERNAME") });
+                    //_logService.Increase(new Log { subject = "MYSQL_PASSWORD", message = Environment.GetEnvironmentVariable("MYSQL_PASSWORD") });
+                    //_logService.Increase(new Log { subject = "MYSQL_ADDRESS", message = Environment.GetEnvironmentVariable("MYSQL_ADDRESS") });
+                    return new CounterResponse { msg = "哈喽！世界".EncodeBase64("Unicode") };
                 case "hello2":
-                    return new CounterResponse { msg = HttpUtility.UrlEncode( "哈喽！世界".EncodeBase64()) };
+                    _logService.Increase(new Log { subject = "转码日志UTF-8", message = "哈喽！世界".EncodeBase64("UTF-8") });
+                    return new CounterResponse { msg = "哈喽！世界".EncodeBase64("UTF-8") };
             }
         }
     }
