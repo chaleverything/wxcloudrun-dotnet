@@ -17,6 +17,7 @@ namespace Service.Instance
         {
             entity.creationTime = DateTime.Now;
             _context.Log.Add(entity);
+            var unused = _context.SaveChanges();
         }
 
         public async Task<List<Log>> Search(LogSearch search)
