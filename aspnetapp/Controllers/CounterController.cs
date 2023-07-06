@@ -1,9 +1,7 @@
 #nullable disable
 using Microsoft.AspNetCore.Mvc;
-using System.Web;
 using aspnetapp.Codes;
 using Models;
-using Service.Instance;
 using Service.Interface;
 
 public class CounterRequest {
