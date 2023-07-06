@@ -13,21 +13,23 @@ namespace aspnetapp.Codes
         /// <param name="code"></param>
         /// <param name="code_type">UTF-8、Unicode、GB2312</param>
         /// <returns></returns>
-        public static string EncodeBase64(this string code, string code_type = "GB18030")
+        public static (string, string) EncodeBase64(this string code, string code_type = "GB18030")
         {
-            string encode = "";
-            byte[] bytes = Encoding.GetEncoding(code_type).GetBytes(code);
+            string encode = string.Empty;
+            string err = string.Empty;
             try
             {
+                byte[] bytes = Encoding.GetEncoding(code_type).GetBytes(code);
                 encode = Convert.ToBase64String(bytes);
             }
-            catch
+            catch (Exception ex)
             {
                 encode = code;
+                err = ex.Message;
             }
             encode = encode.Replace("+", "[");
             encode = encode.Replace("/", "]");
-            return encode;
+            return (encode, err);
         }
 
         /// <summary>
@@ -36,19 +38,21 @@ namespace aspnetapp.Codes
         /// <param name="code"></param>
         /// <param name="code_type">UTF-8、Unicode、GB2312</param>
         /// <returns></returns>
-        public static string DecodeBase64(this string code, string code_type = "GB18030")
+        public static (string, string) DecodeBase64(this string code, string code_type = "GB18030")
         {
+            string decode = string.Empty;
+            string err = string.Empty;
             int num = 0;
             if (string.IsNullOrWhiteSpace(code))
             {
-                return "";
+                goto end;
             }
             else if (code.Length < 4 || int.TryParse(code, out num))
             {
-                return code;
+                return (code, err);
             }
 
-            string decode = "";
+
             code = code.Replace("[", "+");
             code = code.Replace("]", "/");
             try
@@ -56,12 +60,15 @@ namespace aspnetapp.Codes
                 byte[] bytes = Convert.FromBase64String(code);
                 decode = Encoding.GetEncoding(code_type).GetString(bytes);
             }
-            catch
+            catch (Exception ex)
             {
                 decode = code;
+                err = ex.Message;
             }
             decode = decode.Replace("\0", "");
-            return decode;
+
+            end:
+            return (decode, err);
         }
     }
 }
