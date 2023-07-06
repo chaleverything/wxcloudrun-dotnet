@@ -11,9 +11,9 @@ namespace aspnetapp.Codes
         /// 加密
         /// </summary>
         /// <param name="code"></param>
-        /// <param name="code_type">UTF-8、Unicode、GB2312</param>
+        /// <param name="code_type">UTF-8、Unicode、GB2312、GB18030</param>
         /// <returns></returns>
-        public static (string, string) EncodeBase64(this string code, string code_type = "GB18030")
+        public static (string, string) EncodeBase64(this string code, string code_type = "UTF-8")
         {
             string encode = string.Empty;
             string err = string.Empty;
@@ -37,9 +37,9 @@ namespace aspnetapp.Codes
         /// 解码
         /// </summary>
         /// <param name="code"></param>
-        /// <param name="code_type">UTF-8、Unicode、GB2312</param>
+        /// <param name="code_type">UTF-8、Unicode、GB2312、GB18030</param>
         /// <returns></returns>
-        public static (string, string) DecodeBase64(this string code, string code_type = "GB18030")
+        public static (string, string) DecodeBase64(this string code, string code_type = "UTF-8")
         {
             string decode = string.Empty;
             string err = string.Empty;
