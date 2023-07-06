@@ -62,21 +62,21 @@ namespace aspnetapp.Controllers
                 case "hello":
                     //_logService.Increase(new Log { subject = "转码日志UTF-8", message = "哈喽！世界".EncodeBase64("GB2312") });
                     (result, err) = content.EncodeBase64("GB18030");
-                    if(string.IsNullOrWhiteSpace(err))
+                    if(!string.IsNullOrWhiteSpace(err))
                     {
                         _logService.Increase(new Log { subject = "转码日志GB18030", message = err });
                     }
                     return new CounterResponse { msg = result };
                 case "hello2":
                     (result, err) = content.EncodeBase64("GB2312");
-                    if (string.IsNullOrWhiteSpace(err))
+                    if (!string.IsNullOrWhiteSpace(err))
                     {
                         _logService.Increase(new Log { subject = "转码日志GB2312", message = err });
                     }
                     return new CounterResponse { msg = result };
                 case "hello3":
                     (result, err) = content.EncodeBase64("Unicode");
-                    if (string.IsNullOrWhiteSpace(err))
+                    if (!string.IsNullOrWhiteSpace(err))
                     {
                         _logService.Increase(new Log { subject = "转码日志Unicode", message = err });
                     }
