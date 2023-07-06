@@ -58,7 +58,7 @@ namespace aspnetapp.Controllers
                     return new CounterResponse { data = counter.count };
                 case "hello":
                     //_logService.Increase(new Log { subject = "转码日志GB2312", message = "哈喽！世界".EncodeBase64("GB2312") });
-                    return new CounterResponse { msg = "哈喽！世界".EncodeBase64("GB2312") };
+                    return new CounterResponse { msg = "哈喽！世界".EncodeBase64("UTF-8") };
                 case "hello2":
                     //_logService.Increase(new Log { subject = "转码日志GB18030", message = "哈喽！世界".EncodeBase64() });
                     return new CounterResponse { msg = "哈喽！世界".EncodeBase64() };
