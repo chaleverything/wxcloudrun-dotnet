@@ -45,7 +45,6 @@ namespace aspnetapp.Controllers
             //_logService.Increase(new Log { subject = "MYSQL_USERNAME", message = Environment.GetEnvironmentVariable("MYSQL_USERNAME") });
             //_logService.Increase(new Log { subject = "MYSQL_PASSWORD", message = Environment.GetEnvironmentVariable("MYSQL_PASSWORD") });
             //_logService.Increase(new Log { subject = "MYSQL_ADDRESS", message = Environment.GetEnvironmentVariable("MYSQL_ADDRESS") });
-
             var counter = await _counterService.GetCounterWithInit();
             switch (data.action)
             {
