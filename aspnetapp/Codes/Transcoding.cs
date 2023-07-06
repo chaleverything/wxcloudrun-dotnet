@@ -21,14 +21,15 @@ namespace aspnetapp.Codes
             {
                 byte[] bytes = Encoding.GetEncoding(code_type).GetBytes(code);
                 encode = Convert.ToBase64String(bytes);
+                encode = encode.Replace("+", "[");
+                encode = encode.Replace("/", "]");
             }
             catch (Exception ex)
             {
                 encode = code;
                 err = ex.Message;
             }
-            encode = encode.Replace("+", "[");
-            encode = encode.Replace("/", "]");
+            
             return (encode, err);
         }
 
