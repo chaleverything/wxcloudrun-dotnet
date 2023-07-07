@@ -62,11 +62,10 @@ namespace aspnetapp.Controllers
                     _logService.Increase(new LogDto { subject = "½á¹û", message = result });
                     return new CounterResponse { msg = result };
                 case "hello2":
-                    (result, err) = content.EncodeBase64Plus();
-                    return new CounterResponse { msg = result };
+                    return new CounterResponse { msg = System.Text.Encodings.Web.UrlEncoder.Default.Encode(content) };
                 case "hello3":
-                    (result, err) = content.EncodeBase64("Unicode");
-                    return new CounterResponse { msg = result };
+                    (result, err) = content.EncodeBase64();
+                    return new CounterResponse { msg = System.Text.Encodings.Web.UrlEncoder.Default.Encode(result)  };
             }
         }
     }

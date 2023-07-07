@@ -11,7 +11,7 @@ builder.Services.RegisterContexts().RegisterServices();
 var app = builder.Build();
 
 #region Test
-// aspnetapp.LocalTest.TranscodingTest.EncodeTest();
+//aspnetapp.LocalTest.TranscodingTest.EncodeTest();
 #endregion Test
 
 // Configure the HTTP request pipeline.
