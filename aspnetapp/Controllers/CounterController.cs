@@ -59,13 +59,14 @@ namespace aspnetapp.Controllers
                     return new CounterResponse { data = counter.count };
                 case "hello":
                     (result, err) = content.EncodeBase64Plus();
-                    _logService.Increase(new LogDto { subject = System.Text.Encodings.Web.UrlEncoder.Default.Encode("结果"), message = result });
+                    _logService.Increase(new LogDto { subject = "结果", message = result });
                     return new CounterResponse { msg = result };
                 case "hello2":
-                    return new CounterResponse { msg = System.Text.Encodings.Web.UrlEncoder.Default.Encode(content) };
+                    (result, err) = content.EncodeBase64Plus();
+                    return new CounterResponse { msg = result };
                 case "hello3":
                     (result, err) = content.EncodeBase64();
-                    return new CounterResponse { msg = System.Text.Encodings.Web.UrlEncoder.Default.Encode(result)  };
+                    return new CounterResponse { msg = result  };
             }
         }
     }
