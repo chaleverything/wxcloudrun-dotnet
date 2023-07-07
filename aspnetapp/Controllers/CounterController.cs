@@ -58,25 +58,14 @@ namespace aspnetapp.Controllers
                     counter = await _counterService.Clear();
                     return new CounterResponse { data = counter.count };
                 case "hello":
-                    (result, err) = content.EncodeBase64();
-                    if(!string.IsNullOrWhiteSpace(err))
-                    {
-                        _logService.Increase(new Log { subject = "转码日志UTF-8", message = err });
-                    }
+                    (result, err) = content.EncodeBase64Plus();
+                    _logService.Increase(new Log { subject = "result", message = result });
                     return new CounterResponse { msg = result };
                 case "hello2":
                     (result, err) = content.EncodeBase64("GB2312");
-                    if (!string.IsNullOrWhiteSpace(err))
-                    {
-                        _logService.Increase(new Log { subject = "转码日志GB2312", message = err });
-                    }
                     return new CounterResponse { msg = result };
                 case "hello3":
                     (result, err) = content.EncodeBase64("Unicode");
-                    if (!string.IsNullOrWhiteSpace(err))
-                    {
-                        _logService.Increase(new Log { subject = "转码日志Unicode", message = err });
-                    }
                     return new CounterResponse { msg = result };
             }
         }

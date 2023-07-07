@@ -1,6 +1,16 @@
 using DataBase;
 using Service;
 
+
+#region Test
+
+// aspnetapp.LocalTest.TranscodingTest.EncodeTest();
+
+#endregion Test
+
+
+
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.

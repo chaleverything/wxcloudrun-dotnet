@@ -1,35 +1,37 @@
-﻿using System.Text;
+﻿using PeterO.Text;
 
 namespace aspnetapp.Codes
 {
     /// <summary>
     /// 转码
     /// </summary>
-    public static class Transcoding
+    public static class TranscodingPlus
     {
         /// <summary>
         /// 加密
         /// </summary>
         /// <param name="code"></param>
-        /// <param name="code_type">UTF-8、Unicode、GB2312、GB18030</param>
         /// <returns></returns>
-        public static (string, string) EncodeBase64(this string code, string code_type = "UTF-8")
+        public static (string, string) EncodeBase64Plus(this string code)
         {
             string encode = string.Empty;
             string err = string.Empty;
+            if (string.IsNullOrWhiteSpace(code))
+            {
+                goto end;
+            }
+
             try
             {
-                byte[] bytes = Encoding.GetEncoding(code_type).GetBytes(code);
-                encode = Convert.ToBase64String(bytes);
-                encode = encode.Replace("+", "[");
-                encode = encode.Replace("/", "]");
+                encode = Convert.ToBase64String(Encodings.EncodeToBytes(code, Encodings.UTF8));
             }
             catch (Exception ex)
             {
                 encode = code;
                 err = ex.Message;
             }
-            
+
+            end:
             return (encode, err);
         }
 
@@ -37,36 +39,25 @@ namespace aspnetapp.Codes
         /// 解码
         /// </summary>
         /// <param name="code"></param>
-        /// <param name="code_type">UTF-8、Unicode、GB2312、GB18030</param>
         /// <returns></returns>
-        public static (string, string) DecodeBase64(this string code, string code_type = "UTF-8")
+        public static (string, string) DecodeBase64Plus(this string code)
         {
             string decode = string.Empty;
             string err = string.Empty;
-            int num = 0;
             if (string.IsNullOrWhiteSpace(code))
             {
                 goto end;
             }
-            else if (code.Length < 4 || int.TryParse(code, out num))
-            {
-                return (code, err);
-            }
 
-
-            code = code.Replace("[", "+");
-            code = code.Replace("]", "/");
             try
             {
-                byte[] bytes = Convert.FromBase64String(code);
-                decode = Encoding.GetEncoding(code_type).GetString(bytes);
+                decode = Encodings.DecodeToString(Encodings.UTF8, Convert.FromBase64String(code));
             }
             catch (Exception ex)
             {
                 decode = code;
                 err = ex.Message;
             }
-            decode = decode.Replace("\0", "");
 
             end:
             return (decode, err);
