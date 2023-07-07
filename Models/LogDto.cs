@@ -5,7 +5,7 @@ namespace Models
     public class LogDto
     {
         [Ignore]
-        public long id { get; set; }
+        public int id { get; set; }
         public string? subject { get; set; }
         public string? message { get; set; }
 #pragma warning disable IDE1006 // 命名样式

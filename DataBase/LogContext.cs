@@ -16,8 +16,8 @@ namespace DataBase
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            LogConfig logConfig = new LogConfig();
-            modelBuilder.ApplyConfiguration(logConfig);
+            //LogConfig logConfig = new LogConfig();
+            //modelBuilder.ApplyConfiguration(logConfig);
 
             modelBuilder.UseCollation("utf8_general_ci")
                 .HasCharSet("utf8");
