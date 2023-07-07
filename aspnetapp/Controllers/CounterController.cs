@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using aspnetapp.Codes;
 using Models;
 using Service.Interface;
+using System.Text;
 
 public class CounterRequest {
     public string action { get; set; }
@@ -58,14 +59,13 @@ namespace aspnetapp.Controllers
                     counter = await _counterService.Clear();
                     return new CounterResponse { data = counter.count };
                 case "hello":
-                    (result, err) = content.EncodeBase64Plus();
-                    _logService.Increase(new LogDto { subject = "结果", message = result });
-                    return new CounterResponse { msg = result };
+                    _logService.Increase(new LogDto { subject = "结果".ConvertZh(), message = content.ConvertZh() });
+                    return new CounterResponse { msg = content.ConvertZh() };
                 case "hello2":
-                    (result, err) = content.EncodeBase64Plus();
+                    (result, err) = content.ConvertZh().EncodeBase64Plus();
                     return new CounterResponse { msg = result };
                 case "hello3":
-                    (result, err) = content.EncodeBase64();
+                    (result, err) = content.ConvertZh().EncodeBase64();
                     return new CounterResponse { msg = result  };
             }
         }
