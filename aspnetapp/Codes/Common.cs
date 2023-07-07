@@ -9,6 +9,12 @@ namespace aspnetapp.Codes
     {
         public static string ConvertZh(this string content)
         {
+            var bytes = Encoding.Default.GetBytes(content);
+            return Encoding.UTF8.GetString(bytes);
+        }
+
+        public static string ConvertDef(this string content)
+        {
             var bytes = Encoding.UTF8.GetBytes(content);
             return Encoding.Default.GetString(bytes);
         }

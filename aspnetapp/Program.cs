@@ -1,5 +1,6 @@
 using DataBase;
 using Service;
+using System.Text;
 using System.Text.Unicode;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,6 +11,8 @@ builder.Services.RegisterContexts().RegisterServices();
 //builder.Services.AddControllers().AddJsonOptions(opt => {
 //    opt.JsonSerializerOptions.Encoder = System.Text.Encodings.Web.JavaScriptEncoder.Create(UnicodeRanges.All);
 //});
+Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+Console.OutputEncoding = Encoding.UTF8;
 
 var app = builder.Build();
 
