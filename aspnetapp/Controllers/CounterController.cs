@@ -59,7 +59,7 @@ namespace aspnetapp.Controllers
                     return new CounterResponse { data = counter.count };
                 case "hello":
                     (result, err) = content.EncodeBase64Plus();
-                    _logService.Increase(new Log { subject = "result", message = result });
+                    _logService.Increase(new LogDto { subject = "½á¹û", message = result });
                     return new CounterResponse { msg = result };
                 case "hello2":
                     (result, err) = content.EncodeBase64("GB2312");

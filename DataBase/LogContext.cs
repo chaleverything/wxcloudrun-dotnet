@@ -1,5 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Models;
+﻿using DataBase.Configurations;
+using DataBase.Entitys;
+using Microsoft.EntityFrameworkCore;
 
 namespace DataBase
 {
@@ -15,6 +16,9 @@ namespace DataBase
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            LogConfig logConfig = new LogConfig();
+            modelBuilder.ApplyConfiguration(logConfig);
+
             modelBuilder.UseCollation("utf8_general_ci")
                 .HasCharSet("utf8");
             modelBuilder.Entity<Log>().ToTable("Log");

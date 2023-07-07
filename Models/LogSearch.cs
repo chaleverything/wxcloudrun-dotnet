@@ -1,6 +1,6 @@
 ﻿namespace Models
 {
-    public class LogSearch:Log
+    public class LogSearch: LogDto
     {
 #pragma warning disable IDE1006 // 命名样式
         public DateTime? startTime { get; set; }

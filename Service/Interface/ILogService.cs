@@ -4,7 +4,7 @@ namespace Service.Interface
 {
     public interface ILogService
     {
-        void Increase(Log entity);
-        Task<List<Log>> Search(LogSearch search);
+        void Increase(LogDto log);
+        Task<List<LogDto>> Search(LogSearch search);
     }
 }

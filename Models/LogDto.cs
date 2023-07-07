@@ -1,8 +1,11 @@
-﻿namespace Models
+﻿using AutoMapper.Configuration.Annotations;
+
+namespace Models
 {
-    public class Log
+    public class LogDto
     {
-        public int id { get; set; }
+        [Ignore]
+        public long id { get; set; }
         public string? subject { get; set; }
         public string? message { get; set; }
 #pragma warning disable IDE1006 // 命名样式
