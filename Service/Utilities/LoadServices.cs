@@ -7,8 +7,7 @@ namespace Service
     {
         public static IServiceCollection RegisterServices(this IServiceCollection services)
         {
-            //services.AddAutoMapper(typeof(AutoMapperProfile));
-            //services.AddAutoMapper(typeof(AutoMapperProfileExtends));
+            services.AddAutoMapper(typeof(RegisterMappers));
 
 #pragma warning disable CS8602 // 解引用可能出现空引用。
             services.Scan(scan => scan

@@ -18,6 +18,7 @@ namespace Service.Instance
             _mapper = mapper;
         }
 
+
         public void Increase(LogDto log)
         {
             log.creationTime = DateTime.Now;

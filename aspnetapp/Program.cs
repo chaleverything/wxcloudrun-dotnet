@@ -2,15 +2,6 @@ using DataBase;
 using Service;
 
 
-#region Test
-
-// aspnetapp.LocalTest.TranscodingTest.EncodeTest();
-
-#endregion Test
-
-
-
-
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -18,6 +9,11 @@ builder.Services.AddRazorPages();
 builder.Services.RegisterContexts().RegisterServices();
 
 var app = builder.Build();
+
+#region Test
+// aspnetapp.LocalTest.TranscodingTest.EncodeTest();
+#endregion Test
+
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {

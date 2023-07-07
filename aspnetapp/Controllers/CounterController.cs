@@ -40,9 +40,9 @@ namespace aspnetapp.Controllers
         [HttpPost]
         public async Task<ActionResult<CounterResponse>> PostCounter(CounterRequest data)
         {
-            //_logService.Increase(new Log { subject = "MYSQL_USERNAME", message = Environment.GetEnvironmentVariable("MYSQL_USERNAME") });
-            //_logService.Increase(new Log { subject = "MYSQL_PASSWORD", message = Environment.GetEnvironmentVariable("MYSQL_PASSWORD") });
-            //_logService.Increase(new Log { subject = "MYSQL_ADDRESS", message = Environment.GetEnvironmentVariable("MYSQL_ADDRESS") });
+            //_logService.Increase(new LogDto { subject = "MYSQL_USERNAME", message = Environment.GetEnvironmentVariable("MYSQL_USERNAME") });
+            //_logService.Increase(new LogDto { subject = "MYSQL_PASSWORD", message = Environment.GetEnvironmentVariable("MYSQL_PASSWORD") });
+            //_logService.Increase(new LogDto { subject = "MYSQL_ADDRESS", message = Environment.GetEnvironmentVariable("MYSQL_ADDRESS") });
             var counter = await _counterService.GetCounterWithInit();
             var content = "¹þà¶£¡ÊÀ½ç";
             var result = string.Empty;
