@@ -53,7 +53,6 @@ namespace aspnetapp.Codes
                 return (code, err);
             }
 
-
             code = code.Replace("[", "+");
             code = code.Replace("]", "/");
             try
