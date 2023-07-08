@@ -1,9 +1,8 @@
 #nullable disable
 using Microsoft.AspNetCore.Mvc;
 using aspnetapp.Codes;
-using Models;
 using Service.Interface;
-using System.Text;
+using System.Net;
 
 public class CounterRequest {
     public string action { get; set; }
@@ -60,7 +59,7 @@ namespace aspnetapp.Controllers
                     return new CounterResponse { data = counter.count };
                 case "hello":
                     //_logService.Increase(new LogDto { subject = "½á¹û".ConvertZh(), message = content.ConvertZh() });
-                    return new CounterResponse { msg = Encoding.UTF8.GetString(Encoding.Default.GetBytes("ÄãºÃ")) };
+                    return new CounterResponse { msg = WebUtility.UrlEncode(content) };
                 case "hello2":
                     (result, err) = content.ConvertZh().EncodeBase64Plus();
                     return new CounterResponse { msg = result };

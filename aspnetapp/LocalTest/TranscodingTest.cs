@@ -15,5 +15,11 @@ namespace aspnetapp.LocalTest
             (result, err) = result.DecodeBase64Plus();
 
         }
+
+
+        public static void BytesTest()
+        {
+            var a = "哈喽！世界".ConvertBytes();
+        }
     }
 }

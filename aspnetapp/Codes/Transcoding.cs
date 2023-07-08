@@ -21,8 +21,8 @@ namespace aspnetapp.Codes
             {
                 byte[] bytes = Encoding.GetEncoding(code_type).GetBytes(code);
                 encode = Convert.ToBase64String(bytes);
-                encode = encode.Replace("+", "[");
-                encode = encode.Replace("/", "]");
+                //encode = encode.Replace("+", "[");
+                //encode = encode.Replace("/", "]");
             }
             catch (Exception ex)
             {
@@ -53,8 +53,8 @@ namespace aspnetapp.Codes
                 return (code, err);
             }
 
-            code = code.Replace("[", "+");
-            code = code.Replace("]", "/");
+            //code = code.Replace("[", "+");
+            //code = code.Replace("]", "/");
             try
             {
                 byte[] bytes = Convert.FromBase64String(code);
