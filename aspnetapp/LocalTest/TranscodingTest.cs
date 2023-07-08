@@ -1,4 +1,5 @@
 ﻿using aspnetapp.Codes;
+using System.Net;
 
 namespace aspnetapp.LocalTest
 {
@@ -10,16 +11,11 @@ namespace aspnetapp.LocalTest
             var result = string.Empty;
             var err = string.Empty;
 
-
+            
             (result, err) = content.EncodeBase64Plus();
             (result, err) = result.DecodeBase64Plus();
+            result = WebUtility.UrlEncode(content);
 
-        }
-
-
-        public static void BytesTest()
-        {
-            var a = "哈喽！世界".ConvertBytes();
         }
     }
 }

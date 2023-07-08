@@ -31,28 +31,6 @@ namespace aspnetapp.Codes
             return encodedString;
         }
 
-        public static string ConvertBytes(this string content)
-        {
-            var result = string.Empty;
-            var bytes = Encoding.UTF8.GetBytes(content);
-            result += "UTF8:" + string.Join(",", bytes) + "||";
-            bytes = Encoding.Default.GetBytes(content);
-            result += "Default:" + string.Join(",", bytes) + "||";
-            bytes = Encoding.BigEndianUnicode.GetBytes(content);
-            result += "BigEndianUnicode:" + string.Join(",", bytes) + "||";
-            bytes = Encoding.ASCII.GetBytes(content);
-            result += "ASCII:" + string.Join(",", bytes) + "||";
-            bytes = Encoding.Latin1.GetBytes(content);
-            result += "Latin1:" + string.Join(",", bytes) + "||";
-            bytes = Encoding.Unicode.GetBytes(content);
-            result += "Unicode:" + string.Join(",", bytes) + "||";
-            bytes = Encoding.UTF32.GetBytes(content);
-            result += "UTF32:" + string.Join(",", bytes) + "||";
-            bytes = Encoding.UTF7.GetBytes(content);
-            result += "UTF7:" + string.Join(",", bytes);
-
-            return result;
-        }
 
         public static string ConvertDef(this string content)
         {

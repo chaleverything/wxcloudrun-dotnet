@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using aspnetapp.Codes;
 using Service.Interface;
 using System.Net;
+using Models;
 
 public class CounterRequest {
     public string action { get; set; }
@@ -44,7 +45,7 @@ namespace aspnetapp.Controllers
             //_logService.Increase(new LogDto { subject = "MYSQL_PASSWORD", message = Environment.GetEnvironmentVariable("MYSQL_PASSWORD") });
             //_logService.Increase(new LogDto { subject = "MYSQL_ADDRESS", message = Environment.GetEnvironmentVariable("MYSQL_ADDRESS") });
             var counter = await _counterService.GetCounterWithInit();
-            var content = "哈喽！世界";
+            var content = "5ZOI5Za977yB5LiW55WM";
             var result = string.Empty;
             var err = string.Empty;
             switch (data.action)
@@ -60,11 +61,16 @@ namespace aspnetapp.Controllers
                 case "hello":
                     //_logService.Increase(new LogDto { subject = "结果".ConvertZh(), message = content.ConvertZh() });
                     return new CounterResponse { msg = WebUtility.UrlEncode(content) };
+                case "hello1":
+                    (result, err) = content.DecodeBase64Plus();
+                    _logService.Increase(new LogDto { subject = "OK", message = result });
+                    return new CounterResponse { msg = result };
                 case "hello2":
-                    (result, err) = content.ConvertZh().EncodeBase64Plus();
+                    (result, err) = content.DecodeBase64Plus();
                     return new CounterResponse { msg = result };
                 case "hello3":
-                    return new CounterResponse { msg = content.ConvertBytes() };
+                    (result, err) = content.DecodeBase64Plus();
+                    return new CounterResponse { msg = WebUtility.UrlEncode(result) };
             }
         }
     }
