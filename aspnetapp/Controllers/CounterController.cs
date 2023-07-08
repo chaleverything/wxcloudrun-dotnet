@@ -60,12 +60,12 @@ namespace aspnetapp.Controllers
                     return new CounterResponse { data = counter.count };
                 case "hello":
                     //_logService.Increase(new LogDto { subject = "结果".ConvertZh(), message = content.ConvertZh() });
-                    return new CounterResponse { msg = Encoding.UTF8.GetString(Encoding.UTF8.GetBytes("哈喽！世界")) };
+                    return new CounterResponse { msg = Encoding.UTF8.GetString(Encoding.Default.GetBytes("你好")) };
                 case "hello2":
                     (result, err) = content.ConvertZh().EncodeBase64Plus();
                     return new CounterResponse { msg = result };
                 case "hello3":
-                    return new CounterResponse { msg = content.ConvertZh() };
+                    return new CounterResponse { msg = content.ConvertBytes() };
             }
         }
     }

@@ -31,6 +31,17 @@ namespace aspnetapp.Codes
             return encodedString;
         }
 
+        public static string ConvertBytes(this string content)
+        {
+            var result = string.Empty;
+            var bytes = Encoding.UTF8.GetBytes(content);
+            foreach(var b in bytes)
+            {
+                result += $"{b},";
+            }
+            return result;
+        }
+
         public static string ConvertDef(this string content)
         {
             var bytes = Encoding.UTF8.GetBytes(content);
