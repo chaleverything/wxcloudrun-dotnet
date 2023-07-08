@@ -65,7 +65,7 @@ namespace aspnetapp.Controllers
                     (result, err) = content.ConvertZh().EncodeBase64Plus();
                     return new CounterResponse { msg = result };
                 case "hello3":
-                    return new CounterResponse { msg = content };
+                    return new CounterResponse { msg = content.ConvertZh() };
             }
         }
     }
