@@ -1,4 +1,4 @@
-#nullable disable
+ï»¿#nullable disable
 using Microsoft.AspNetCore.Mvc;
 using aspnetapp.Codes;
 using Service.Interface;
@@ -46,7 +46,6 @@ namespace aspnetapp.Controllers
             //_logService.Increase(new LogDto { subject = "MYSQL_ADDRESS", message = Environment.GetEnvironmentVariable("MYSQL_ADDRESS") });
             var counter = await _counterService.GetCounterWithInit();
             var content = "5ZOI5Za977yB5LiW55WM";
-            var content2 = "¹þà¶£¡ÊÀ½ç";
             var result = string.Empty;
             var err = string.Empty;
             switch (data.action)
@@ -60,11 +59,11 @@ namespace aspnetapp.Controllers
                     counter = await _counterService.Clear();
                     return new CounterResponse { data = counter.count };
                 case "hello":
-                    //_logService.Increase(new LogDto { subject = "½á¹û".ConvertZh(), message = content.ConvertZh() });
+                    //_logService.Increase(new LogDto { subject = "ç»“æžœ".ConvertZh(), message = content.ConvertZh() });
                     return new CounterResponse { msg = WebUtility.UrlEncode(content) };
                 case "hello1":
                     (result, err) = content.DecodeBase64Plus();
-                    _logService.Increase(new LogDto { subject = "OK", message = result });
+                    _logService.Increase(new LogDto { subject = "æ—¥å¿—", message = result });
                     return new CounterResponse { msg = result };
                 case "hello2":
                     (result, err) = content.DecodeBase64Plus();
