@@ -46,6 +46,7 @@ namespace aspnetapp.Controllers
             //_logService.Increase(new LogDto { subject = "MYSQL_ADDRESS", message = Environment.GetEnvironmentVariable("MYSQL_ADDRESS") });
             var counter = await _counterService.GetCounterWithInit();
             var content = "5ZOI5Za977yB5LiW55WM";
+            var content2 = "¹þà¶£¡ÊÀ½ç";
             var result = string.Empty;
             var err = string.Empty;
             switch (data.action)
