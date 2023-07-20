@@ -27,7 +27,7 @@ namespace aspnetapp.Controllers
             if (lst != null) 
             {
                 result.IsSucc = true;
-                var source = lst.Select(n => new CategoryTree { id = n.id, name = n.name, parentId = n.parentId, thumbnailPath = n.thumbnailPath, thumbnailContent = n.thumbnailContent }).ToList();
+                var source = lst.Select(n => new CategoryTree { id = n.id, name = n.name, parentId = n.parentId, thumbnail = n.thumbnailPath, thumbnailPath = n.thumbnailPath, thumbnailContent = n.thumbnailContent }).ToList();
                 result.Data = source.Where(n => !n.parentId.HasValue).ToList();
                 result.Data.ForEach(m =>
                 {

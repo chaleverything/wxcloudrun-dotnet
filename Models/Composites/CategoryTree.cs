@@ -14,6 +14,11 @@
         /// 略图地址
         /// 长度：200
         /// </summary>
+        public string? thumbnail { get; set; }
+        /// <summary>
+        /// 略图地址
+        /// 长度：200
+        /// </summary>
         public string? thumbnailPath { get; set; }
         /// <summary>
         /// 略图内容
