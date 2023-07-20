@@ -1,9 +1,6 @@
-﻿namespace DataBase.Entitys
+﻿namespace Models
 {
-    /// <summary>
-    /// 日志
-    /// </summary>
-    public class Log: EntityBase
+    public class LogSearch: SearchBase
     {
         /// <summary>
         /// 主题
@@ -15,10 +12,5 @@
         /// 长度：2000
         /// </summary>
         public string? message { get; set; }
-        /// <summary>
-        /// 创建人
-        /// 长度：15
-        /// </summary>
-        public string? creator { get; set; }
     }
 }

@@ -1,9 +1,9 @@
-﻿namespace DataBase.Entitys
+﻿namespace Models
 {
     /// <summary>
     /// 日志
     /// </summary>
-    public class Log: EntityBase
+    public class LogDto: DtoBase
     {
         /// <summary>
         /// 主题

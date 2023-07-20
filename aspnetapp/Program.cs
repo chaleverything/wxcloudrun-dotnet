@@ -18,7 +18,8 @@ var app = builder.Build();
 
 #region Test
 //aspnetapp.LocalTest.TranscodingTest.EncodeTest();
-//aspnetapp.LocalTest.TranscodingTest.BytesTest();
+//aspnetapp.LocalTest.EnumTest.GetEnumTest();
+//aspnetapp.LocalTest.CommTest.FillChildrenTest();
 #endregion Test
 
 // Configure the HTTP request pipeline.
