@@ -29,7 +29,7 @@ namespace Service.Instance
 
         public async Task<List<CategorysDto>> Search(CategorysSearch search)
         {
-            var query = _context.Categorys.AsNoTracking();
+            var query = _context.Categorys.AsNoTracking().Where(n => !n.cancelTime.HasValue);
             if (search.parentId.HasValue)
             {
                 query = query.Where(n => n.parentId == search.parentId);
@@ -44,7 +44,7 @@ namespace Service.Instance
 
         public async Task<List<CategorysDto>> GetAll()
         {
-            var query = _context.Categorys.AsNoTracking();
+            var query = _context.Categorys.AsNoTracking().Where(n => !n.cancelTime.HasValue);
             return _mapper.Map<List<CategorysDto>>(await query.ToListAsync());
         }
     }

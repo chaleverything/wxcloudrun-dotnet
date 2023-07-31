@@ -20,5 +20,15 @@
                 t.GetMethod(setMethodName)?.Invoke(parent, new object[] { children });
             }
         }
+
+        public static string BufferToBase64String(this byte[]? bytes)
+        {
+            if (bytes?.Length > 0)
+            {
+                return Convert.ToBase64String(bytes, 0, bytes.Length);
+            }
+
+            return string.Empty;
+        }
     }
 }
