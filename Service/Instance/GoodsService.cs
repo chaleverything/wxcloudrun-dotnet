@@ -31,7 +31,7 @@ namespace Service.Instance
         public async Task<(List<GoodsDto>, int)> Search(GoodsSearch search)
         {
             var query = _context.Goods.AsNoTracking().Where(n => !n.cancelTime.HasValue);
-            (int total, int currentPage, int linePerPage, string orderByField, string direction) = search.GetDefaultCondition();
+            (int total, int pageIndex, int pageSize, string sortBy, string direction) = search.GetDefaultCondition();
             if (search.lstStoreId?.Count > 0)
             {
                 query = query.Where(n => n.storeId.HasValue && search.lstStoreId.Contains(n.storeId.Value));
@@ -51,8 +51,8 @@ namespace Service.Instance
 
             total = query.Count();
 
-            // .SortBy($"{orderByField} {direction}");
-            query = query.OrderByDescending(n=>n.soldNum).ThenByDescending(n=>n.hitQuantity).ThenByDescending(n=>n.stockQuantity).Skip((currentPage - 1) * linePerPage).Take(linePerPage);
+            // .SortBy($"{sortBy} {direction}");
+            query = query.OrderByDescending(n=>n.soldNum).ThenByDescending(n=>n.hitQuantity).ThenByDescending(n=>n.stockQuantity).Skip((pageIndex - 1) * pageSize).Take(pageSize);
             return (_mapper.Map<List<GoodsDto>>(await query.ToListAsync()), total);
         }
     }

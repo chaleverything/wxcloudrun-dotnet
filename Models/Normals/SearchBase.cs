@@ -13,15 +13,15 @@
         /// <summary>
         /// 当前页
         /// </summary>
-        public int? currentPage { get; set; }
+        public int? pageIndex { get; set; }
         /// <summary>
         /// 每页行数
         /// </summary>
-        public int? linePerPage { get; set; }
+        public int? pageSize { get; set; }
         /// <summary>
         /// 排序字段
         /// </summary>
-        public string? orderByField { get; set; }
+        public string? sortBy { get; set; }
         /// <summary>
         /// 排序方向
         /// </summary>
