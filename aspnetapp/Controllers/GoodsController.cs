@@ -60,8 +60,8 @@ namespace aspnetapp.Controllers
                     hitQuantity = g.hitQuantity,
                     title = g.title,
                     etitle = g.etitle,
-                    primaryImage = lstImg.FirstOrDefault(n => n.flag == "1")?.path,
-                    primaryImageContent = lstImg.FirstOrDefault(n => n.flag == "1")?.content.BufferToBase64String(),
+                    primaryImage = imgs.FirstOrDefault(n => n.flag == "1")?.path,
+                    primaryImageContent = imgs.FirstOrDefault(n => n.flag == "1")?.content.BufferToBase64String(),
                     images = imgs.Where(n => n.flag == "2").Select(n => new CombMedias
                     {
                         Path = n.path,
