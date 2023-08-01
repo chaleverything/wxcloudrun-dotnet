@@ -4,6 +4,7 @@ using Service.Interface;
 using Models;
 using Common.Utilities;
 using Common.Enumeraties;
+using aspnetapp.Codes;
 
 namespace aspnetapp.Controllers
 {
@@ -51,6 +52,8 @@ namespace aspnetapp.Controllers
                 var imgs = lstImg.Where(n => n.tableId == g.id).ToList();
                 var specs = lstSpec.Where(n => n.goodsId == g.id).ToList();
                 var skus = lstSku.Where(n => n.goodsId == g.id).ToList();
+
+                _logService.Increase(new LogDto { subject = $"imgs_{g.id}", message = imgs.FirstOrDefault(n => n.flag == "1")?.path });
 
                 var goodsInfo = new GoodsInfo
                 {
