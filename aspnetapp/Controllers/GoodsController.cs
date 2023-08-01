@@ -36,8 +36,8 @@ namespace aspnetapp.Controllers
         [HttpPost("GetGoodsInfo")]
         public async Task<ActionResult<ResultList<GoodsInfo>>> GetGoodsInfo(GoodsSearch search)
         {
-            var result = new ResultList<GoodsInfo>();
-            var lstGoods = await _goodsService.Search(search);
+            var result = new ResultList<GoodsInfo> { IsSucc = true };
+            (var lstGoods, var total) = await _goodsService.Search(search);
             var lstGoodsId = lstGoods.Select(n => n.id).ToList();
             var lstImg = await _mediasService.Search(new MediasSearch { tableType = (short)TableTypeEnum.Goods, mType = (short)MediaTypeEnum.Image, tableIds = lstGoodsId });
             var lstSpec = await _specsService.Search(new SpecsSearch { goodsIds = lstGoodsId });
@@ -106,7 +106,11 @@ namespace aspnetapp.Controllers
                     limitInfo = g.limitInfo
                 };
 
+                lstInfo.Add(goodsInfo);
             });
+
+            result.Data = lstInfo;
+            result.ReturnValue = new { Total = total };
 
             return Ok(result);
         }
