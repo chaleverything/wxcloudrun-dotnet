@@ -8,13 +8,13 @@ namespace aspnetapp.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class HomeController : ControllerBase
+    public class MyHomeController : ControllerBase
     {
         private readonly IMediasService _mediasService;
         private readonly ITabsService _tabsService;
         private readonly ILogService _logService;
 
-        public HomeController(IMediasService mediasService,
+        public MyHomeController(IMediasService mediasService,
             ITabsService tabsService,
             ILogService logService)
         {
