@@ -61,5 +61,14 @@
         /// <param name="length"></param>
         /// <returns></returns>
         public static string CutLength(this string str, int length = 2000) => str.Substring(0, length);
+
+        /// <summary>
+        /// 获取环境变量值
+        /// </summary>
+        /// <returns></returns>
+        public static string GetEnvironmentVariable()
+        {
+            return $"[U:{Environment.GetEnvironmentVariable("MYSQL_USERNAME")}][P:{Environment.GetEnvironmentVariable("MYSQL_PASSWORD")}][H:{Environment.GetEnvironmentVariable("MYSQL_ADDRESS")}]";
+        }
     }
 }

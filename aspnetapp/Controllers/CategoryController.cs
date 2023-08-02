@@ -22,6 +22,7 @@ namespace aspnetapp.Controllers
         [HttpPost("GetAllCategorys")]
         public async Task<ActionResult<ResultList<CategoryTree>>> GetAllCategorys()
         {
+            _logService.Increase(new LogDto { subject = "Print EnvironmentVariable", message = Common.Utilities.NormalComm.GetEnvironmentVariable() });
             var result = new ResultList<CategoryTree>();
             var lst = await _categorysService.GetAll();
             if (lst != null) 
