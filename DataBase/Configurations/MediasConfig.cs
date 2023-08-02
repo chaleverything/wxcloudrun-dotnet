@@ -24,7 +24,7 @@ namespace DataBase.Configurations
 
             builder.Property(n => n.path)
                 .IsUnicode()
-                .HasMaxLength(200);
+                .HasMaxLength(250);
 
             //builder.Property(n => n.content);
 

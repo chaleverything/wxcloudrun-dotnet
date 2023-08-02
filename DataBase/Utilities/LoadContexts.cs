@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using DataBase.Configurations;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace DataBase
 {
@@ -16,6 +17,7 @@ namespace DataBase
             services.AddDbContext<SpecsContext>();
             services.AddDbContext<SpecValsContext>();
             services.AddDbContext<StoresContext>();
+            services.AddDbContext<TabsContext>();
             return services;
         }
     }

@@ -22,7 +22,7 @@
         public long? tableId { get; set; }
         /// <summary>
         /// 媒介地址
-        /// 长度：200
+        /// 长度：250
         /// </summary>
         public string? path { get; set; }
         /// <summary>
