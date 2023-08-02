@@ -54,5 +54,12 @@
         /// <returns></returns>
         public static (int, int, int, string, string) GetDefaultCondition<T>(this T entity) => (0, (int)(typeof(T).GetProperty("pageIndex")?.GetValue(entity) ?? "1"), (int)(typeof(T).GetProperty("pageSize")?.GetValue(entity) ?? "10"), (string)(typeof(T).GetProperty("sortBy")?.GetValue(entity) ?? "creationTime"), (string)(typeof(T).GetProperty("direction")?.GetValue(entity) ?? "DESC"));
 
+        /// <summary>
+        /// 截取长度
+        /// </summary>
+        /// <param name="str"></param>
+        /// <param name="length"></param>
+        /// <returns></returns>
+        public static string CutLength(this string str, int length = 2000) => str.Substring(0, length);
     }
 }
