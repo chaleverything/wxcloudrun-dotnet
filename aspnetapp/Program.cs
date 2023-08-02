@@ -1,7 +1,6 @@
 using DataBase;
 using Service;
 using System.Text;
-using System.Text.Unicode;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,10 +22,10 @@ var app = builder.Build();
 #endregion Test
 
 // Configure the HTTP request pipeline.
-if (!app.Environment.IsDevelopment())
-{
-    app.UseExceptionHandler("/Error");
-}
+//if (!app.Environment.IsDevelopment())
+//{
+//    app.UseExceptionHandler("/Error");
+//}
 
 app.UseStaticFiles();
 
