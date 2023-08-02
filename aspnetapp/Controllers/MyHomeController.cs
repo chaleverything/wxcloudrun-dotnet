@@ -31,9 +31,13 @@ namespace aspnetapp.Controllers
             try
             {
                 _logService.Increase(new LogDto { subject = "GetNavigation", message = "A" });
-                var lstImg = await _mediasService.Search(new MediasSearch { tableType = (short)TableTypeEnum.None, mType = (short)MediaTypeEnum.Image, tableId = (long)PageEnum.Home });
-                _logService.Increase(new LogDto { subject = "GetNavigation", message = "B" });
+
                 var lstTab = await _tabsService.Search(new TabsSearch { type = (short)PageEnum.Home });
+
+                _logService.Increase(new LogDto { subject = "GetNavigation", message = "B" });
+
+                var lstImg = await _mediasService.Search(new MediasSearch { tableType = (short)TableTypeEnum.None, mType = (short)MediaTypeEnum.Image, tableId = (long)PageEnum.Home });
+                
                 _logService.Increase(new LogDto { subject = "GetNavigation", message = "C" });
 
                 result.Data = new HomeNavigation
