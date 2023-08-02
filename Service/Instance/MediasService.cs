@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Common.Utilities;
 using DataBase;
 using DataBase.Entitys;
 using Microsoft.EntityFrameworkCore;
@@ -11,11 +12,13 @@ namespace Service.Instance
     {
         private readonly MediasContext _context;
         private readonly IMapper _mapper;
+        private readonly ILogService _logService;
 
-        public MediasService(MediasContext context, IMapper mapper)
+        public MediasService(MediasContext context, IMapper mapper, ILogService logService)
         {
             _context = context;
             _mapper = mapper;
+            _logService = logService;
         }
 
 
@@ -29,29 +32,40 @@ namespace Service.Instance
 
         public async Task<List<MediasDto>> Search(MediasSearch search)
         {
-            var query = _context.Medias.AsNoTracking();
-            if (search.tableType.HasValue)
+            try
             {
-                query = query.Where(n => n.tableType == search.tableType);
-            }
-            if (search.mType.HasValue)
-            {
-                query = query.Where(n => n.mType == search.mType);
-            }
-            if (search.tableId.HasValue)
-            {
-                query = query.Where(n => n.tableId == search.tableId);
-            }
-            if(search.tableIds?.Count > 0)
-            {
-                query = query.Where(n => n.tableId.HasValue && search.tableIds.Contains(n.tableId.Value));
-            }
-            if (!string.IsNullOrWhiteSpace(search.flag))
-            {
-                query = query.Where(n => n.flag == search.flag);
-            }
+                var query = _context.Medias.AsNoTracking();
 
-            return _mapper.Map<List<MediasDto>>(await query.ToListAsync());
+                _logService.Increase(new LogDto { subject = "Medias Search", message = "1"});
+                if (search.tableType.HasValue)
+                {
+                    query = query.Where(n => n.tableType == search.tableType);
+                }
+                if (search.mType.HasValue)
+                {
+                    query = query.Where(n => n.mType == search.mType);
+                }
+                if (search.tableId.HasValue)
+                {
+                    query = query.Where(n => n.tableId == search.tableId);
+                }
+                if (search.tableIds?.Count > 0)
+                {
+                    query = query.Where(n => n.tableId.HasValue && search.tableIds.Contains(n.tableId.Value));
+                }
+                if (!string.IsNullOrWhiteSpace(search.flag))
+                {
+                    query = query.Where(n => n.flag == search.flag);
+                }
+                _logService.Increase(new LogDto { subject = "Medias Search", message = "2" });
+                return _mapper.Map<List<MediasDto>>(await query.ToListAsync());
+            }
+            catch(Exception ex)
+            {
+                _logService.Increase(new LogDto { subject = "Medias Search", message = ex.Message.CutLength(300) });
+                _logService.Increase(new LogDto { subject = "Medias Search", message = ex.StackTrace?.CutLength(500) });
+                throw new Exception(ex.Message);
+            }
         }
     }
 }

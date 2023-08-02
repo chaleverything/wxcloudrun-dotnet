@@ -30,15 +30,8 @@ namespace aspnetapp.Controllers
             var result = new Result<HomeNavigation> { IsSucc  = true };
             try
             {
-                _logService.Increase(new LogDto { subject = "GetNavigation", message = "A" });
-
                 var lstTab = await _tabsService.Search(new TabsSearch { type = (short)PageEnum.Home });
-
-                _logService.Increase(new LogDto { subject = "GetNavigation", message = "B" });
-
                 var lstImg = await _mediasService.Search(new MediasSearch { tableType = (short)TableTypeEnum.None, mType = (short)MediaTypeEnum.Image, tableId = (long)PageEnum.Home });
-                
-                _logService.Increase(new LogDto { subject = "GetNavigation", message = "C" });
 
                 result.Data = new HomeNavigation
                 {
@@ -49,8 +42,8 @@ namespace aspnetapp.Controllers
             }
             catch (Exception ex)
             {
-                _logService.Increase(new LogDto { subject = "GetNavigation_Error", message = ex.Message.CutLength() });
-                _logService.Increase(new LogDto { subject = "GetNavigation_Error", message = ex.StackTrace?.CutLength() });
+                _logService.Increase(new LogDto { subject = "GetNavigation_Error", message = ex.Message.CutLength(300) });
+                _logService.Increase(new LogDto { subject = "GetNavigation_Error", message = ex.StackTrace?.CutLength(300) });
             }
 
             return Ok(result);
