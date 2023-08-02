@@ -4,7 +4,6 @@ using Service.Interface;
 using Models;
 using Common.Utilities;
 using Common.Enumeraties;
-using aspnetapp.Codes;
 
 namespace aspnetapp.Controllers
 {
