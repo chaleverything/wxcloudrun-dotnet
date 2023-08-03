@@ -22,8 +22,9 @@ namespace DataBase
                 var addressParts = Environment.GetEnvironmentVariable("MYSQL_ADDRESS")?.Split(':');
                 var host = addressParts?[0];
                 var port = addressParts?[1];
+                var database = "aspnet_demo";
 
-                var connstr = $"server={host};port={port};user={username};password={password};database=aspnet_demo";
+                var connstr = $"server={host};port={port};user={username};password={password};database={database}";
                 optionsBuilder.UseMySql(connstr, Microsoft.EntityFrameworkCore.ServerVersion.Parse("5.7.18-mysql"));
             }
         }

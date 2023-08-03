@@ -1,6 +1,7 @@
 ﻿using DataBase;
 using Microsoft.EntityFrameworkCore;
 using Models;
+using System.Data.Entity.Validation;
 
 namespace aspnetapp.LocalTest
 {
@@ -10,10 +11,10 @@ namespace aspnetapp.LocalTest
         {
             try
             {
-                //var context = new MediasContext();
-                //var query = context.Medias.AsNoTracking();
-                var context = new CategorysContext();
-                var query = context.Categorys.AsNoTracking();
+                var context = new MediasContext();
+                var query = context.Medias.AsNoTracking();
+                //var context = new CategorysContext();
+                //var query = context.Categorys.AsNoTracking();
 
                 //if (search.tableType.HasValue)
                 //{
@@ -37,7 +38,11 @@ namespace aspnetapp.LocalTest
                 //}
                 var lst = query.ToList();
             }
-            catch(Exception ex)
+            catch (DbEntityValidationException e)
+            {
+                var msg = e.EntityValidationErrors.ToArray()[0].ValidationErrors.ToArray()[0].ErrorMessage;
+            }
+            catch (Exception ex)
             {
 
             }
