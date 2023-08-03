@@ -35,6 +35,10 @@ namespace DataBase.Configurations
                 .IsUnicode()
                 .HasMaxLength(250);
 
+            builder.Property(n => n.tag)
+                .IsUnicode()
+                .HasMaxLength(100);
+
             builder.Property(n => n.categoryIds)
                 .IsUnicode()
                 .HasMaxLength(200);

@@ -36,7 +36,7 @@ namespace aspnetapp.Controllers
                 result.Data = new HomeNavigation
                 {
                     swiper = lstImg.OrderBy(n => n.flag).Select(n => n.path).ToList(),
-                    tabList = lstTab.Select(n => new TKey { text = n.text, key = n.key }).ToList(),
+                    tabList = lstTab.Select(n => new TKey { text = n.text, key = n.key, code = n.code }).ToList(),
                     activityImg = "https://we-retail-static-1300977798.cos.ap-guangzhou.myqcloud.com/retail-mp/activity/banner.png"
                 };
             }

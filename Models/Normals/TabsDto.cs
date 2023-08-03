@@ -21,6 +21,11 @@
         /// </summary>
         public short? key { get; set; }
         /// <summary>
+        /// 文本
+        /// 长度：100
+        /// </summary>
+        public string? code { get; set; }
+        /// <summary>
         /// 作废时间
         /// </summary>
         public DateTime? cancelTime { get; set; }

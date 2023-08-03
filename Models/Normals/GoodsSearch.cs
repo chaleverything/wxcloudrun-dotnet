@@ -17,6 +17,11 @@
         /// </summary>
         public string? etitle { get; set; }
         /// <summary>
+        /// 标签
+        /// 长度：100
+        /// </summary>
+        public string? tag { get; set; }
+        /// <summary>
         /// 类别ID集合
         /// </summary>
         public string? categoryIds { get; set; }

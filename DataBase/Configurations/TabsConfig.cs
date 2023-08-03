@@ -23,6 +23,10 @@ namespace DataBase.Configurations
             builder.Property(n => n.key)
                 .HasMaxLength(4);
 
+            builder.Property(n => n.code)
+                .IsUnicode()
+                .HasMaxLength(100);
+
             base.Configure(builder);
         }
     }

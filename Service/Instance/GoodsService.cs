@@ -32,6 +32,11 @@ namespace Service.Instance
         {
             var query = _context.Goods.AsNoTracking().Where(n => !n.cancelTime.HasValue);
             (int total, int pageIndex, int pageSize, string sortBy, string direction) = search.GetDefaultCondition();
+
+            if (!string.IsNullOrWhiteSpace(search.tag))
+            {
+                query = query.Where(n => n.tag != null && n.tag.Contains(search.tag));
+            }
             if (search.lstStoreId?.Count > 0)
             {
                 query = query.Where(n => n.storeId.HasValue && search.lstStoreId.Contains(n.storeId.Value));
