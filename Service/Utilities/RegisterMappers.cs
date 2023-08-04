@@ -16,6 +16,7 @@ namespace Service
             CreateMap<Categorys, CategorysDto>().ReverseMap();
             CreateMap<Comments, CommentsDto>().ReverseMap();
             CreateMap<Goods, GoodsDto>().ReverseMap();
+            CreateMap<KeywordHistorys, KeywordHistorysDto>().ReverseMap();
             CreateMap<Log, LogDto>().ReverseMap();
             CreateMap<Medias, MediasDto>().ReverseMap();
             CreateMap<Skus, SkusDto>().ReverseMap();

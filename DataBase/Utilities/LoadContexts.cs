@@ -11,6 +11,7 @@ namespace DataBase
             services.AddDbContext<CategorysContext>();
             services.AddDbContext<CommentsContext>();
             services.AddDbContext<GoodsContext>();
+            services.AddDbContext<KeywordHistorysContext>();
             services.AddDbContext<LogContext>();
             services.AddDbContext<MediasContext>();
             services.AddDbContext<SkusContext>();
