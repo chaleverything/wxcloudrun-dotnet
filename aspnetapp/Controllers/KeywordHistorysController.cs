@@ -14,12 +14,35 @@ namespace aspnetapp.Controllers
     public class KeywordHistorysController : ControllerBase
     {
         private readonly IKeywordHistorysService _keywordHistorysService;
+        private readonly IUserService _userService;
         private readonly ILogService _logService;
 
-        public KeywordHistorysController(IKeywordHistorysService keywordHistorysService, ILogService logService)
+        public KeywordHistorysController(IKeywordHistorysService keywordHistorysService, IUserService userService, ILogService logService)
         {
             _keywordHistorysService = keywordHistorysService;
+            _userService = userService;
             _logService = logService;
+        }
+
+        [HttpPost("IncreaseKeywordHistorys")]
+        public async Task<ActionResult<Result>> IncreaseKeywordHistorysByOpenId(KeywordHistorysDto keywordHistory)
+        {
+            var result = new Result { IsSucc = true };
+            if(string.IsNullOrWhiteSpace(keywordHistory.openId) || string.IsNullOrWhiteSpace(keywordHistory.content))
+            {
+                goto end;
+            }
+
+            var user = await _userService.FindByOpenId(new UserSearch { openId = keywordHistory.openId });
+            if (user == null) 
+            {
+                goto end;
+            }
+
+            _keywordHistorysService.Increase(new KeywordHistorysDto { openId = keywordHistory.openId, content = keywordHistory.content, creationTime = DateTime.Now });
+
+            end:
+            return Ok(result);
         }
 
         [HttpPost("ClearKeywordHistorysByOpenId")]
