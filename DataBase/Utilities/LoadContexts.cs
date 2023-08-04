@@ -18,6 +18,7 @@ namespace DataBase
             services.AddDbContext<SpecValsContext>();
             services.AddDbContext<StoresContext>();
             services.AddDbContext<TabsContext>();
+            services.AddDbContext<UserContext>();
             return services;
         }
     }

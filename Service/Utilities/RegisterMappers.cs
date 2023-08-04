@@ -23,6 +23,7 @@ namespace Service
             CreateMap<SpecVals, SpecValsDto>().ReverseMap();
             CreateMap<Stores, StoresDto>().ReverseMap();
             CreateMap<Tabs, TabsDto>().ReverseMap();
+            CreateMap<User, UserDto>().ReverseMap();
         }
     }
 }
