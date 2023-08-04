@@ -5,6 +5,7 @@ using Models;
 using aspnetapp.Codes;
 using Common.Utilities;
 using Common.Enumeraties;
+using Service.Instance;
 
 namespace aspnetapp.Controllers
 {
@@ -35,8 +36,12 @@ namespace aspnetapp.Controllers
         {
             var result = new Result<UserDto> { IsSucc = true };
 
+            _logService.Increase(new LogDto { subject = "User", message = key.code });
+
             var appUser =  key.code.GetAppUser();
-            if(string.IsNullOrWhiteSpace(appUser?.openId))
+
+            _logService.Increase(new LogDto { subject = "User", message = appUser?.openId });
+            if (string.IsNullOrWhiteSpace(appUser?.openId))
             {
                 goto end;
             }
