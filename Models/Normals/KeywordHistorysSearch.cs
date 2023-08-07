@@ -12,5 +12,10 @@
         /// 长度：50
         /// </summary>
         public string? unionId { get; set; }
+        /// <summary>
+        /// 关键字
+        /// 长度：100
+        /// </summary>
+        public string? content { get; set; }
     }
 }
