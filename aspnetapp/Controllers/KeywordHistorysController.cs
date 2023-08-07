@@ -98,27 +98,29 @@ namespace aspnetapp.Controllers
         }
 
         [HttpPost("GetKeywordHistorysByOpenId")]
-        public async Task<ActionResult<Result<List<KeywordHistorysDto>>>> GetKeywordHistorysByOpenId(KeywordHistorysSearch search)
+        public async Task<ActionResult<Result<List<string>>>> GetKeywordHistorysByOpenId(KeywordHistorysSearch search)
         {
-            //_logService.Increase(new LogDto { subject = "GetKeywordHistorysByOpenId", message = JsonConvert.SerializeObject(search) });
-            var result = new Result<List<KeywordHistorysDto>> { IsSucc = true };
-            result.Data = await _keywordHistorysService.FindByOpenId(search);
+            var result = new Result<List<string>> { IsSucc = true };
+            var lst = await _keywordHistorysService.FindByOpenId(search);
+            result.Data = lst?.Select(n => n.content).ToList();
             return Ok(result);
         }
 
         [HttpPost("GetKeywordHistorysByUnionId")]
-        public async Task<ActionResult<Result<List<KeywordHistorysDto>>>> GetKeywordHistorysByUnionId(KeywordHistorysSearch search)
+        public async Task<ActionResult<Result<List<string>>>> GetKeywordHistorysByUnionId(KeywordHistorysSearch search)
         {
-            var result = new Result<List<KeywordHistorysDto>> { IsSucc = true };
-            result.Data = await _keywordHistorysService.FindByUnionId(search);
+            var result = new Result<List<string>> { IsSucc = true };
+            var lst = await _keywordHistorysService.FindByUnionId(search);
+            result.Data = lst?.Select(n => n.content).ToList();
             return Ok(result);
         }
 
         [HttpPost("GetPopulars")]
-        public async Task<ActionResult<Result<List<string>>>> GetPopulars(SearchBase search)
+        public async Task<ActionResult<Result<List<string>>>> GetPopulars(KeywordHistorysSearch search)
         {
             var result = new Result<List<string>> { IsSucc = true };
-            result.Data = await _keywordHistorysService.GetPopulars(search);
+            var lst = await _keywordHistorysService.GetPopulars(search);
+            result.Data = lst?.Select(n => n.content).ToList();
             return Ok(result);
         }
 

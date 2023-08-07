@@ -83,7 +83,7 @@ namespace Service.Instance
         }
 
 
-        public async Task<List<string>> GetPopulars(SearchBase search)
+        public async Task<List<KeywordHistorysDto>> GetPopulars(KeywordHistorysSearch search)
         {
             (int total, int pageIndex, int pageSize, string sortBy, string direction) = search.GetDefaultCondition();
 #pragma warning disable CS8602 // 解引用可能出现空引用。
@@ -97,8 +97,8 @@ namespace Service.Instance
                 });
 #pragma warning restore CS8602 // 解引用可能出现空引用。
 
-            var result = await query.OrderByDescending(n => n.number).ThenBy(n => n.creationTime).Skip((pageIndex - 1) * pageSize).Take(pageSize).Select(n => n.content).ToListAsync();
-            return _mapper.Map<List<string>>(result);
+            var lst = await query.OrderByDescending(n => n.number).ThenBy(n => n.creationTime).Skip((pageIndex - 1) * pageSize).Take(pageSize).ToListAsync();
+            return _mapper.Map<List<KeywordHistorysDto>>(lst);
         }
     }
 }

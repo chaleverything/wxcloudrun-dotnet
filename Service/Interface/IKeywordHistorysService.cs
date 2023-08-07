@@ -11,6 +11,6 @@ namespace Service.Interface
         Task<List<KeywordHistorysDto>> FindByUnionId(KeywordHistorysSearch search);
         Task<KeywordHistorysDto?> FindContentByOpenId(KeywordHistorysSearch search);
         Task<KeywordHistorysDto?> FindContentByUnionId(KeywordHistorysSearch search);
-        Task<List<string>> GetPopulars(SearchBase search);
+        Task<List<KeywordHistorysDto>> GetPopulars(KeywordHistorysSearch search);
     }
 }

@@ -24,6 +24,10 @@ namespace DataBase
                 var port = addressParts?[1];
                 var database = "aspnet_demo";
 
+#if DEBUG
+                database = "projectmanage";
+#endif
+
                 var connstr = $"server={host};port={port};user={username};password={password};database={database}";
                 optionsBuilder.UseMySql(connstr, Microsoft.EntityFrameworkCore.ServerVersion.Parse("5.7.18-mysql"));
             }

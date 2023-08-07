@@ -19,7 +19,7 @@ var app = builder.Build();
 //aspnetapp.LocalTest.TranscodingTest.EncodeTest();
 //aspnetapp.LocalTest.EnumTest.GetEnumTest();
 //aspnetapp.LocalTest.CommTest.DefaultConditionTest();
-//aspnetapp.LocalTest.MediasTest.SearchTest(new MediasSearch { tableType = (short)TableTypeEnum.None, mType = (short)MediaTypeEnum.Image, tableId = (long)PageEnum.Home });
+//aspnetapp.LocalTest.EntityTest.GetPopularsTest();
 #endregion Test
 
 // Configure the HTTP request pipeline.
