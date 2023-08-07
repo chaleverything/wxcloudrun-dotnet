@@ -119,8 +119,7 @@ namespace aspnetapp.Controllers
         public async Task<ActionResult<Result<List<string>>>> GetPopulars(KeywordHistorysSearch search)
         {
             var result = new Result<List<string>> { IsSucc = true };
-            var lst = await _keywordHistorysService.GetPopulars(search);
-            result.Data = lst?.Select(n => n.content).ToList();
+            result.Data = await _keywordHistorysService.GetPopulars(search);
             return Ok(result);
         }
 

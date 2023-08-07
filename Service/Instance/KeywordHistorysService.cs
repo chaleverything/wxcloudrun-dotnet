@@ -83,33 +83,26 @@ namespace Service.Instance
         }
 
 
-        public async Task<List<KeywordHistorysDto>> GetPopulars(KeywordHistorysSearch search)
+        public async Task<List<string>> GetPopulars(KeywordHistorysSearch search)
         {
-            try
-            {
-                (int total, int pageIndex, int pageSize, string sortBy, string direction) = search.GetDefaultCondition();
-                _logService.Increase(new LogDto { subject = "GetPopulars", message = $"[pageIndex:{pageIndex}][pageSize:{pageSize}]" });
+            (int total, int pageIndex, int pageSize, string sortBy, string direction) = search.GetDefaultCondition();
+            //_logService.Increase(new LogDto { subject = "GetPopulars", message = $"[pageIndex:{pageIndex}][pageSize:{pageSize}]" });
 #pragma warning disable CS8602 // 解引用可能出现空引用。
-                var query = _context.KeywordHistorys.AsNoTracking()
-                    .GroupBy(m => new { m.content })
-                    .Select(n => new KeywordHistorysSummary
-                    {
-                        content = n.Key.content,
-                        number = n.Count(),
-                        creationTime = n.Where(k => k.creationTime.HasValue).OrderBy(k => k.creationTime).FirstOrDefault().creationTime
-                    });
+            var query = _context.KeywordHistorys.AsNoTracking()
+                .GroupBy(m => new { m.content })
+                .Select(n => new KeywordHistorysSummary
+                {
+                    content = n.Key.content,
+                    number = n.Count(),
+                    creationTime = n.Where(k => k.creationTime.HasValue).OrderBy(k => k.creationTime).FirstOrDefault().creationTime
+                });
 #pragma warning restore CS8602 // 解引用可能出现空引用。
 
-                var lst = await query.OrderByDescending(n => n.number).ThenBy(n => n.creationTime).Skip((pageIndex - 1) * pageSize).Take(pageSize).ToListAsync();
+            var lst = await query.OrderByDescending(n => n.number).ThenBy(n => n.creationTime).Skip((pageIndex - 1) * pageSize).Take(pageSize).ToListAsync();
 
-                _logService.Increase(new LogDto { subject = "GetPopulars", message = $"[lst:{JsonConvert.SerializeObject(lst)}]" });
-                return _mapper.Map<List<KeywordHistorysDto>>(lst);
-            }
-            catch(Exception ex)
-            {
-                _logService.Increase(new LogDto { subject = "GetPopulars", message = $"[Exception:{ex.Message}]" });
-                return new List<KeywordHistorysDto>();
-            }
+            //_logService.Increase(new LogDto { subject = "GetPopulars", message = $"[lst:{JsonConvert.SerializeObject(lst)}]" });
+            return lst.Select(n => n.content ?? string.Empty).ToList();
+
         }
     }
 }
