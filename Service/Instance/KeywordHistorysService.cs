@@ -4,6 +4,7 @@ using DataBase;
 using DataBase.Entitys;
 using Microsoft.EntityFrameworkCore;
 using Models;
+using Newtonsoft.Json;
 using Service.Interface;
 
 namespace Service.Instance
@@ -11,11 +12,13 @@ namespace Service.Instance
     public class KeywordHistorysService: IKeywordHistorysService
     {
         private readonly KeywordHistorysContext _context;
+        private readonly ILogService _logService;
         private readonly IMapper _mapper;
 
-        public KeywordHistorysService(KeywordHistorysContext context, IMapper mapper)
+        public KeywordHistorysService(KeywordHistorysContext context, ILogService logService, IMapper mapper)
         {
             _context = context;
+            _logService = logService;
             _mapper = mapper;
         }
 
@@ -43,6 +46,7 @@ namespace Service.Instance
         public async Task<List<KeywordHistorysDto>> FindByOpenId(KeywordHistorysSearch search)
         {
             (int total, int pageIndex, int pageSize, string sortBy, string direction) = search.GetDefaultCondition();
+            _logService.Increase(new LogDto { subject = "FindByUnionId", message = $"[pageIndex:{pageIndex}][pageSize:{pageSize}]" });
             var query = _context.KeywordHistorys.AsNoTracking().Where(n=> n.openId == search.openId);
             return _mapper.Map<List<KeywordHistorysDto>>(await query.OrderByDescending(n => n.creationTime).Skip((pageIndex - 1) * pageSize).Take(pageSize).ToListAsync());
         }
@@ -50,6 +54,7 @@ namespace Service.Instance
         public async Task<List<KeywordHistorysDto>> FindByUnionId(KeywordHistorysSearch search)
         {
             (int total, int pageIndex, int pageSize, string sortBy, string direction) = search.GetDefaultCondition();
+            _logService.Increase(new LogDto { subject = "FindByUnionId", message = $"[pageIndex:{pageIndex}][pageSize:{pageSize}]" });
             var query = _context.KeywordHistorys.AsNoTracking().Where(n => n.unionId == search.unionId);
             return _mapper.Map<List<KeywordHistorysDto>>(await query.OrderByDescending(n => n.creationTime).Skip((pageIndex - 1) * pageSize).Take(pageSize).ToListAsync());
         }

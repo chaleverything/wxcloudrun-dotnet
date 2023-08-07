@@ -6,6 +6,7 @@ using aspnetapp.Codes;
 using Common.Utilities;
 using Common.Enumeraties;
 using Service.Instance;
+using Newtonsoft.Json;
 
 namespace aspnetapp.Controllers
 {
@@ -99,6 +100,7 @@ namespace aspnetapp.Controllers
         [HttpPost("GetKeywordHistorysByOpenId")]
         public async Task<ActionResult<Result<List<KeywordHistorysDto>>>> GetKeywordHistorysByOpenId(KeywordHistorysSearch search)
         {
+            _logService.Increase(new LogDto { subject = "GetKeywordHistorysByOpenId", message = JsonConvert.SerializeObject(search) });
             var result = new Result<List<KeywordHistorysDto>> { IsSucc = true };
             result.Data = await _keywordHistorysService.FindByOpenId(search);
             return Ok(result);
