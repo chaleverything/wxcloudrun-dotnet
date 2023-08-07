@@ -31,6 +31,10 @@ namespace aspnetapp.LocalTest
             });
         }
 
-
+        public static void DefaultConditionTest()
+        {
+            KeywordHistorysSearch search = new KeywordHistorysSearch();
+            (int total, int pageIndex, int pageSize, string sortBy, string direction) = search.GetDefaultCondition();
+        }
     }
 }

@@ -18,7 +18,7 @@ var app = builder.Build();
 #region Test
 //aspnetapp.LocalTest.TranscodingTest.EncodeTest();
 //aspnetapp.LocalTest.EnumTest.GetEnumTest();
-//aspnetapp.LocalTest.CommTest.FillChildrenTest();
+//aspnetapp.LocalTest.CommTest.DefaultConditionTest();
 //aspnetapp.LocalTest.MediasTest.SearchTest(new MediasSearch { tableType = (short)TableTypeEnum.None, mType = (short)MediaTypeEnum.Image, tableId = (long)PageEnum.Home });
 #endregion Test
 

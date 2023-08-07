@@ -62,7 +62,7 @@
         /// <typeparam name="T"></typeparam>
         /// <param name="entity"></param>
         /// <returns></returns>
-        public static (int, int, int, string, string) GetDefaultCondition<T>(this T entity) => (0, (int)(typeof(T).GetProperty("pageIndex")?.GetValue(entity) ?? "1"), (int)(typeof(T).GetProperty("pageSize")?.GetValue(entity) ?? "10"), (string)(typeof(T).GetProperty("sortBy")?.GetValue(entity) ?? "creationTime"), (string)(typeof(T).GetProperty("direction")?.GetValue(entity) ?? "DESC"));
+        public static (int, int, int, string, string) GetDefaultCondition<T>(this T entity) => (0, (int)(typeof(T).GetProperty("pageIndex")?.GetValue(entity) ?? 1), (int)(typeof(T).GetProperty("pageSize")?.GetValue(entity) ?? 10), (string)(typeof(T).GetProperty("sortBy")?.GetValue(entity) ?? "creationTime"), (string)(typeof(T).GetProperty("direction")?.GetValue(entity) ?? "DESC"));
 
         #endregion 默认查询条件
 
