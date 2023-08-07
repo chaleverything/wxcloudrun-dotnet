@@ -18,7 +18,6 @@ var app = builder.Build();
 #region Test
 //aspnetapp.LocalTest.TranscodingTest.EncodeTest();
 //aspnetapp.LocalTest.EnumTest.GetEnumTest();
-//aspnetapp.LocalTest.CommTest.DefaultConditionTest();
 //aspnetapp.LocalTest.EntityTest.SearchResultText();
 #endregion Test
 
