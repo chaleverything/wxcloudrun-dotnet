@@ -35,5 +35,15 @@
         /// 长度：1
         /// </summary>
         public bool? isPutOnSale { get; set; }
+        /// <summary>
+        /// 最低销售价格
+        /// 长度：11
+        /// </summary>
+        public float? minSalePrice { get; set; }
+        /// <summary>
+        /// 最低价格线
+        /// 长度：11
+        /// </summary>
+        public float? maxSalePrice { get; set; }
     }
 }

@@ -60,5 +60,38 @@ namespace Service.Instance
             query = query.OrderByDescending(n=>n.soldNum).ThenByDescending(n=>n.hitQuantity).ThenByDescending(n=>n.stockQuantity).Skip((pageIndex - 1) * pageSize).Take(pageSize);
             return (_mapper.Map<List<GoodsDto>>(await query.ToListAsync()), total);
         }
+
+
+        public async Task<(List<GoodsDto>, int)> SearchResult(GoodsSearch search)
+        {
+            var query = _context.Goods.AsNoTracking().Where(n => !n.cancelTime.HasValue);
+            (int total, int pageIndex, int pageSize, string sortBy, string direction) = search.GetDefaultCondition();
+
+            if (!string.IsNullOrWhiteSpace(search.title))
+            {
+                query = query.Where(n => n.title != null && n.title.Contains(search.title) || n.etitle != null && n.etitle.Contains(search.title));
+            }
+            if (search.available.HasValue)
+            {
+                query = query.Where(n => n.available == search.available);
+            }
+            if (search.isPutOnSale.HasValue)
+            {
+                query = query.Where(n => n.isPutOnSale == search.isPutOnSale);
+            }
+            if (search.minSalePrice.HasValue)
+            {
+                query = query.Where(n => n.minSalePrice >= search.minSalePrice);
+            }
+            if (search.maxSalePrice.HasValue)
+            {
+                query = query.Where(n => n.minSalePrice <= search.maxSalePrice);
+            }
+
+            total = query.Count();
+
+            query = query.Sort(sortBy, direction).Skip((pageIndex - 1) * pageSize).Take(pageSize);
+            return (_mapper.Map<List<GoodsDto>>(await query.ToListAsync()), total);
+        }
     }
 }

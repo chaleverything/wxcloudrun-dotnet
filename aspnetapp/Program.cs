@@ -19,7 +19,7 @@ var app = builder.Build();
 //aspnetapp.LocalTest.TranscodingTest.EncodeTest();
 //aspnetapp.LocalTest.EnumTest.GetEnumTest();
 //aspnetapp.LocalTest.CommTest.DefaultConditionTest();
-//aspnetapp.LocalTest.EntityTest.GetPopularsTest();
+//aspnetapp.LocalTest.EntityTest.SearchResultText();
 #endregion Test
 
 // Configure the HTTP request pipeline.

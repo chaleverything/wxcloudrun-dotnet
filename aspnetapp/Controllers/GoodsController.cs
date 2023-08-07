@@ -37,7 +37,26 @@ namespace aspnetapp.Controllers
         public async Task<ActionResult<ResultList<GoodsInfo>>> GetGoodsInfo(GoodsSearch search)
         {
             var result = new ResultList<GoodsInfo> { IsSucc = true };
+            search.isPutOnSale = true;
+            search.available = true;
             (var lstGoods, var total) = await _goodsService.Search(search);
+            result.ReturnValue = new { Total = total };
+            return await GetGoodsDetail(lstGoods, result);
+        }
+
+        [HttpPost("GetGoodsResult")]
+        public async Task<ActionResult<ResultList<GoodsInfo>>> GetGoodsResult(GoodsSearch search)
+        {
+            var result = new ResultList<GoodsInfo> { IsSucc = true };
+            search.isPutOnSale = true;
+            search.available = true;
+            (var lstGoods, var total) = await _goodsService.SearchResult(search);
+            result.ReturnValue = new { Total = total };
+            return await GetGoodsDetail(lstGoods, result);
+        }
+
+        public async Task<ActionResult<ResultList<GoodsInfo>>> GetGoodsDetail(List<GoodsDto> lstGoods, ResultList<GoodsInfo> result)
+        {
             var lstGoodsId = lstGoods.Select(n => n.id).ToList();
             var lstImg = await _mediasService.Search(new MediasSearch { tableType = (short)TableTypeEnum.Goods, mType = (short)MediaTypeEnum.Image, tableIds = lstGoodsId });
             var lstSpec = await _specsService.Search(new SpecsSearch { goodsIds = lstGoodsId });
@@ -71,12 +90,12 @@ namespace aspnetapp.Controllers
                         Content = n.content.BufferToBase64String()
                     }).ToList(),
                     categoryIds = g.categoryIds,
-                    specList = specs.Where(s => s.goodsId == g.id).Select(s => new SpecInfo 
+                    specList = specs.Where(s => s.goodsId == g.id).Select(s => new SpecInfo
                     {
                         id = s.id,
                         title = s.title,
                         index = s.index,
-                        specValueList = lstSpecVal.Where(sv=>sv.specId == s.id).Select(sv => new SpecValInfo 
+                        specValueList = lstSpecVal.Where(sv => sv.specId == s.id).Select(sv => new SpecValInfo
                         {
                             id = sv.id,
                             specId = s.id,
@@ -84,7 +103,7 @@ namespace aspnetapp.Controllers
                             value = sv.value,
                             index = sv.index,
                         }).OrderBy(sv => sv.index).ToList(),
-                    }).OrderBy(s=>s.index).ToList(),
+                    }).OrderBy(s => s.index).ToList(),
                     skuList = skus.Where(s => s.goodsId == g.id).Select(s => new SkuInfo
                     {
                         id = s.id,
@@ -99,13 +118,13 @@ namespace aspnetapp.Controllers
 
                     available = g.available,
                     minSalePrice = g.minSalePrice,
-                    minLinePrice =  g.minLinePrice,
+                    minLinePrice = g.minLinePrice,
                     maxSalePrice = g.maxSalePrice,
                     maxLinePrice = g.maxLinePrice,
                     stockQuantity = g.stockQuantity,
                     soldNum = g.soldNum,
                     isPutOnSale = g.isPutOnSale,
-                    spuTagList =  g.spuTagList,
+                    spuTagList = g.spuTagList,
                     limitInfo = g.limitInfo
                 };
 
@@ -113,7 +132,6 @@ namespace aspnetapp.Controllers
             });
 
             result.Data = lstInfo;
-            result.ReturnValue = new { Total = total };
 
             return Ok(result);
         }
