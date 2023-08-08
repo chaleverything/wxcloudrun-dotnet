@@ -69,7 +69,7 @@ namespace Service.Instance
 
             if (!string.IsNullOrWhiteSpace(search.title))
             {
-                query = query.Where(n => n.title != null && n.title.Contains(search.title) || n.etitle != null && n.etitle.Contains(search.title));
+                query = query.Where(n => (n.title != null && n.title.Contains(search.title)) || (n.etitle != null && n.etitle.Contains(search.title)));
             }
             if (search.available.HasValue)
             {
