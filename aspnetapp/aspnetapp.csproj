@@ -24,8 +24,16 @@
   <ItemGroup>
     <ProjectReference Include="..\Common\Common.csproj" />
     <ProjectReference Include="..\DataBase\DataBase.csproj" />
+    <ProjectReference Include="..\EntityDB\EntityDataBase.csproj" />
+    <ProjectReference Include="..\EntityService\EntityService.csproj" />
     <ProjectReference Include="..\Models\Models.csproj" />
     <ProjectReference Include="..\Service\Service.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="MindrayApp.Model.RD">
+      <HintPath>..\packages\Normal\MindrayApp.Model.RD.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>

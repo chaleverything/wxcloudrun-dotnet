@@ -141,5 +141,33 @@
         }
 
         #endregion 将一个实体相同命名属性值赋值给另一个实体
+
+        #region 封装string的Dynamic参数
+
+        /// <summary>
+        /// 封装string的Dynamic参数
+        /// </summary>
+        /// <param name="expression"></param>
+        /// <returns></returns>
+        public static string MapDynStr(this string expression)
+        {
+            var arr = expression.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+            var lst = new List<string>();
+
+            foreach (var item in arr)
+            {
+                var oper = StaticVariable._DSNOPERA.FirstOrDefault(n => item.Contains(n));
+                if (!string.IsNullOrEmpty(oper))
+                {
+                    var keyVal = item.Split(oper);
+                    lst.Add(keyVal[0] + oper + @"""" + keyVal[1] + @"""");
+                }
+            }
+
+            return string.Join(",", lst);
+        }
+
+        #endregion 封装string的Dynamic参数
+
     }
 }

@@ -1,3 +1,4 @@
+using aspnetapp.LocalTest;
 using DataBase;
 using Service;
 using System.Text;
@@ -16,9 +17,9 @@ Console.OutputEncoding = Encoding.UTF8;
 var app = builder.Build();
 
 #region Test
-//aspnetapp.LocalTest.TranscodingTest.EncodeTest();
-//aspnetapp.LocalTest.EnumTest.GetEnumTest();
-//aspnetapp.LocalTest.EntityTest.SearchResultText();
+
+LocalTest.Main();
+
 #endregion Test
 
 // Configure the HTTP request pipeline.

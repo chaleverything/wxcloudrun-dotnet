@@ -1,7 +1,9 @@
 ﻿using Common.Enumeraties;
 using Common.Utilities;
 using DataBase;
-using Microsoft.EntityFrameworkCore;
+using EntityDataBase;
+using EntityService;
+using MindrayApp.Model.RD;
 using Models;
 using System.Data.Entity;
 using System.Data.Entity.Validation;
@@ -115,6 +117,102 @@ namespace aspnetapp.LocalTest
 
             query = query.Sort(sortBy, direction).Skip((pageIndex - 1) * pageSize).Take(pageSize);
             var lst = query.ToList();
+        }
+
+        public static void LinqDynamicQueryTest()
+        {
+            var lstParamsDto = new EntityLstParamsDto
+            {
+                ParamOperator = OperatorEnum.And,
+                LstEntityParams = new List<EntityParamsDto>
+                {
+                    new EntityParamsDto
+                    {
+                          LstEntityParam = new List<EntityParamDto>
+                          {
+                              new EntityParamDto
+                              {
+                                  ParamOperator = OperatorEnum.Contants,
+                                  FieldName = "FReqDesc",
+                                  FieldValue = @"""a""",
+                              },
+                              new EntityParamDto
+                              {
+                                  ParamOperator = OperatorEnum.Contants,
+                                  FieldName = "FSolution",
+                                  FieldValue = @"""a""",
+                              },
+                              new EntityParamDto
+                              {
+                                  ParamOperator = OperatorEnum.Contants,
+                                  FieldName = "FUserReqSource",
+                                  FieldValue = @"""a""",
+                              },
+                              new EntityParamDto
+                              {
+                                  ParamOperator = OperatorEnum.Contants,
+                                  FieldName = "FUserReqDesc",
+                                  FieldValue = @"""a""",
+                              },
+                              new EntityParamDto
+                              {
+                                  ParamOperator = OperatorEnum.Contants,
+                                  FieldName = "FKeyWord",
+                                  FieldValue = @"""a""",
+                              },
+                              new EntityParamDto
+                              {
+                                  ParamOperator = OperatorEnum.Contants,
+                                  FieldName = "FCompetition",
+                                  FieldValue = @"""a""",
+                              },
+                              new EntityParamDto
+                              {
+                                  ParamOperator = OperatorEnum.Contants,
+                                  FieldName = "FAcceptance",
+                                  FieldValue = @"""a""",
+                              },
+                          }
+                    },
+                    new EntityParamsDto
+                    {
+                          LstEntityParam = new List<EntityParamDto>
+                          {
+                              new EntityParamDto
+                              {
+                                  ParamOperator = OperatorEnum.Contants,
+                                  FieldName = "FSubject",
+                                  FieldValue = @"""单""",
+                              },
+                          }
+                    },
+                    new EntityParamsDto
+                    {
+                          LstEntityParam = new List<EntityParamDto>
+                          {
+                              new EntityParamDto
+                              {
+                                  ParamOperator = OperatorEnum.Contants,
+                                  FieldName = "FNo",
+                                  FieldValue = @"""0001""",
+                              },
+                          }
+                    }
+                }
+            };
+
+            var lst = new Base().Query<vw_REQ_ApplyExp, RDDataBase>(lstParamsDto);
+        }
+
+        public static void LinqDynamicUpdateTest()
+        {
+            var result = new Base().Update<TB_REQ_Apply, RDDataBase>("FID==07DF033F-A12E-4646-A746-06FEF2BECF5D".MapDynStr(), new Dictionary<string, object> { ["FSubject"] = "东路", ["FUserReqSource"] = "网络" });
+            //var result = new Base().Update<TB_REQ_Apply, RDDataBase>("FID==07DF033F-A12E-4646-A746-06FEF2BECF5D".MapDynStr(), @"new(""你好啊"" as FSubject,""哈哈哈嘿嘿"" as FUserReqSource)");
+        }
+
+        public static void LinqDynamicRemoveTest()
+        {
+            var result = new Base().Remove<TB_REQ_ReqLatitudeOptions, RDDataBase>("FID==47666781-CADC-4FA8-B21E-445557FC8D0C".MapDynStr());
         }
     }
 }
